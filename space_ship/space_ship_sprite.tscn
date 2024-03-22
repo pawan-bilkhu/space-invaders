@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=3 uid="uid://dvjpvqpggjxhs"]
+
+[ext_resource type="Texture2D" uid="uid://dtpbd10wm5bkq" path="res://assets/ships/SpaceShips.png" id="1_353it"]
+[ext_resource type="Script" path="res://space_ship/space_ship_sprite.gd" id="2_lp0il"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w8lnq"]
+radius = 27.0185
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_feupq"]
+radius = 27.0
+
+[sub_resource type="Animation" id="Animation_icdqg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_kxnfc"]
+resource_name = "move_left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.174533]
+}
+
+[sub_resource type="Animation" id="Animation_lmf00"]
+resource_name = "move_right"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.174533]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qpu3j"]
+_data = {
+"RESET": SubResource("Animation_icdqg"),
+"move_left": SubResource("Animation_kxnfc"),
+"move_right": SubResource("Animation_lmf00")
+}
+
+[node name="SpaceShipSprite" type="CharacterBody2D" node_paths=PackedStringArray("area_2d", "animation_player", "animated_sprite_2d", "weapon_group", "shoot_timer")]
+script = ExtResource("2_lp0il")
+speed = 600.0
+area_2d = NodePath("Area2D")
+animation_player = NodePath("AnimationPlayer")
+animated_sprite_2d = NodePath("StaticBody2D")
+weapon_group = NodePath("WeaponGroup")
+shoot_timer = NodePath("ShootTimer")
+
+[node name="StaticBody2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_353it")
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_w8lnq")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="HitboxShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_feupq")
+debug_color = Color(0.992157, 0, 0.227451, 0.419608)
+
+[node name="WeaponGroup" type="Node2D" parent="."]
+
+[node name="LeftWeapon" type="Marker2D" parent="WeaponGroup"]
+position = Vector2(-20, -40)
+
+[node name="CentreWeapon" type="Marker2D" parent="WeaponGroup"]
+position = Vector2(0, -40)
+
+[node name="RightWeapon" type="Marker2D" parent="WeaponGroup"]
+position = Vector2(19, -40)
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qpu3j")
+}
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

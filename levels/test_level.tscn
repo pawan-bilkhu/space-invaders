@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dilbvjqk3lc8b"]
+
+[ext_resource type="PackedScene" uid="uid://dvjpvqpggjxhs" path="res://space_ship/space_ship_sprite.tscn" id="1_rk3bn"]
+[ext_resource type="Script" path="res://levels/test_level.gd" id="1_yo2ls"]
+
+[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("player_camera", "space_ship", "meteor_generator_timer")]
+script = ExtResource("1_yo2ls")
+player_camera = NodePath("Camera2D")
+space_ship = NodePath("SpaceShipSprite")
+spawn_interval = 0.5
+meteor_generator_timer = NodePath("MeteorGeneratorTimer")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="SpaceShipSprite" parent="." instance=ExtResource("1_rk3bn")]
+position = Vector2(548, 461)
+
+[node name="MeteorGeneratorTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="MeteorGeneratorTimer" to="." method="_on_meteor_generator_timer_timeout"]

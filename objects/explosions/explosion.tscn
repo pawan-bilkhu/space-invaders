@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://bue1kqn28t4n5"]
+
+[ext_resource type="Script" path="res://objects/explosions/explosion.gd" id="1_18qmy"]
+[ext_resource type="Texture2D" uid="uid://cpso161jrma07" path="res://assets/explosions/explosion.png" id="1_44y53"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walry"]
+atlas = ExtResource("1_44y53")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpibt"]
+atlas = ExtResource("1_44y53")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f86re"]
+atlas = ExtResource("1_44y53")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aaol4"]
+atlas = ExtResource("1_44y53")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ne3oj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_walry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpibt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f86re")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aaol4")
+}],
+"loop": false,
+"name": &"fire_explosion",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i22nr"]
+
+[node name="Explosion" type="Area2D" node_paths=PackedStringArray("animated_sprite_2d")]
+script = ExtResource("1_18qmy")
+animated_sprite_2d = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ne3oj")
+animation = &"fire_explosion"
+
+[node name="HitboxShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_i22nr")
+debug_color = Color(0.988235, 0, 0.305882, 0.419608)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
