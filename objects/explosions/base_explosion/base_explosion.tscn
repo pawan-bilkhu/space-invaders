@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://ofgkfsflfxet"]
+
+[ext_resource type="Script" path="res://objects/explosions/base_explosion/base_explosion.gd" id="1_jstgh"]
+
+[node name="BaseExplosion" type="Area2D" node_paths=PackedStringArray("animated_sprite_2d")]
+script = ExtResource("1_jstgh")
+animated_sprite_2d = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="HitboxShape2D" type="CollisionShape2D" parent="."]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

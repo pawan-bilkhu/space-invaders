@@ -47,6 +47,8 @@ _data = {
 }
 
 [node name="Meteor" type="RigidBody2D" node_paths=PackedStringArray("animation_player")]
+collision_layer = 2
+collision_mask = 7
 gravity_scale = 0.0
 script = ExtResource("1_byuyi")
 animation_player = NodePath("AnimationPlayer")
@@ -60,6 +62,8 @@ scale = Vector2(4, 4)
 shape = SubResource("CircleShape2D_ircrm")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 7
 
 [node name="HitboxShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(4, 4)

@@ -42,7 +42,7 @@ func on_shoot() -> void:
 		var initial_rotation: float = angle_of_rotation
 		var inital_velocity: Vector2 = distance_to_mouse.normalized()
 		for weapon in weapon_group.get_children():
-			GameManager.create_projectile(weapon.global_position, inital_velocity, initial_rotation)
+			GameManager.create_projectile(GameManager.PROJECTILE_KEY.RED_LASER, weapon.global_position, inital_velocity, initial_rotation)
 		start_countdown(countdown_time)
 
 

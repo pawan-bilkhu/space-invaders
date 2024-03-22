@@ -55,6 +55,12 @@ shoot={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="space_ship"
+2d_physics/layer_2="meteors"
+2d_physics/layer_3="projectiles"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

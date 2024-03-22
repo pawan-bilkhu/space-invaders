@@ -3,13 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://dvjpvqpggjxhs" path="res://space_ship/space_ship_sprite.tscn" id="1_rk3bn"]
 [ext_resource type="Script" path="res://levels/test_level.gd" id="1_yo2ls"]
 
-[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("player_camera", "space_ship", "meteor_generator_timer", "cpu_particles_2d")]
+[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("player_camera", "space_ship", "meteor_generator_timer")]
 script = ExtResource("1_yo2ls")
 player_camera = NodePath("SpaceShipSprite/Camera2D")
 space_ship = NodePath("SpaceShipSprite")
 spawn_interval = 0.5
 meteor_generator_timer = NodePath("MeteorGeneratorTimer")
-cpu_particles_2d = NodePath("SpaceShipSprite/CPUParticles2D")
 
 [node name="SpaceShipSprite" parent="." instance=ExtResource("1_rk3bn")]
 position = Vector2(548, 461)
@@ -17,21 +16,8 @@ position = Vector2(548, 461)
 [node name="Camera2D" type="Camera2D" parent="SpaceShipSprite"]
 position_smoothing_enabled = true
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="SpaceShipSprite"]
-position = Vector2(0, -409)
-emitting = false
-amount = 30
-lifetime = 3.0
-emission_shape = 3
-emission_rect_extents = Vector2(1200, 1)
-direction = Vector2(0, 1)
-spread = 0.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 335.01
-initial_velocity_max = 737.35
-scale_amount_max = 3.0
-
 [node name="MeteorGeneratorTimer" type="Timer" parent="."]
+wait_time = 0.5
 autostart = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]

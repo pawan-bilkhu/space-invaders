@@ -1,7 +1,8 @@
 extends Area2D
+class_name BaseExplosion
 
 @export var animated_sprite_2d: AnimatedSprite2D
-@export var animation: StringName = "fire_explosion"
+@export var animation: StringName = ""
 @export var scale_factor: Vector2 = Vector2.ONE
 var is_dead = false
 
@@ -19,3 +20,4 @@ func destroy() -> void:
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	destroy()
+

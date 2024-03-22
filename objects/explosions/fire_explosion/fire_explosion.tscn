@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=3 uid="uid://dabojym20gv6e"]
+
+[ext_resource type="PackedScene" uid="uid://ofgkfsflfxet" path="res://objects/explosions/base_explosion/base_explosion.tscn" id="1_5ns8y"]
+[ext_resource type="Script" path="res://objects/explosions/fire_explosion/fire_explosion.gd" id="1_cy36k"]
+[ext_resource type="Texture2D" uid="uid://cpso161jrma07" path="res://assets/explosions/explosion.png" id="2_1qfd3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opwft"]
+atlas = ExtResource("2_1qfd3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsoxx"]
+atlas = ExtResource("2_1qfd3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vq4cp"]
+atlas = ExtResource("2_1qfd3")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s6ns"]
+atlas = ExtResource("2_1qfd3")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l631l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opwft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bsoxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vq4cp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2s6ns")
+}],
+"loop": false,
+"name": &"fire_explosion",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3080i"]
+
+[node name="FireExplosion" instance=ExtResource("1_5ns8y")]
+script = ExtResource("1_cy36k")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_l631l")
+animation = &"fire_explosion"
+
+[node name="HitboxShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_3080i")
+debug_color = Color(1, 0, 0.0941176, 0.419608)

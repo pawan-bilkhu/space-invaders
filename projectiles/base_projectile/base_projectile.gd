@@ -1,12 +1,9 @@
 extends CharacterBody2D
+class_name BaseProjectile
 
 
 @export var speed: float = 200
 var is_dead: bool = false
-
-
-func _ready() -> void:
-	pass
 
 
 func _physics_process(delta: float) -> void:

@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bordyd3sdswla"]
+
+[ext_resource type="Script" path="res://projectiles/base_projectile/base_projectile.gd" id="1_01bru"]
+
+[node name="base_projectile" type="CharacterBody2D"]
+script = ExtResource("1_01bru")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="HitboxShape2D" type="CollisionShape2D" parent="Area2D"]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

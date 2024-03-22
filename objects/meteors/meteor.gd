@@ -17,11 +17,16 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group(GameManager.GROUP_LASER):
+	if body.is_in_group(GameManager.GROUP_BASE_LASER):
 		body.destroy()
 		animation_player.play("damaged")
 		health -= 1
-		on_health_zero()
+	if body.is_in_group(GameManager.GROUP_RICOCHET_LASER):
+		health -= 1
+		animation_player.play("damaged")
+		body.damage()
+	on_health_zero()
+
 
 func on_health_zero() -> void:
 	if health > 0:
@@ -33,7 +38,7 @@ func destroy() -> void:
 	if is_dead:
 		return
 	is_dead = true
-	GameManager.create_explosion(global_position, 5*scale_factor, "fire_explosion")
+	GameManager.create_explosion(GameManager.EXPLOSION_KEY.FIRE_EXPLOSION, global_position, 10*scale_factor)
 	queue_free()
 
 
