@@ -1,19 +1,19 @@
-extends CharacterBody2D
+extends RigidBody2D
 
 @export var animation_player: AnimationPlayer
 @export var scale_factor: Vector2 = Vector2.ONE
-@export var initial_velocity: Vector2 = Vector2.ZERO
+@export var initial_force: Vector2 = Vector2.ZERO
 @export var health: int = 0
 var is_dead: bool = false
 
 
 func _ready() -> void:
-	velocity = initial_velocity
+	add_constant_central_force(initial_force)
 	apply_scale(scale_factor)
 
 
 func _physics_process(delta: float) -> void:
-	move_and_slide()
+	pass
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

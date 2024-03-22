@@ -27,10 +27,10 @@ func create_projectile(_starting_position: Vector2, _velocity: Vector2, _rotatio
 	call_add_child(new_projectile)
 
 
-func create_meteor(_starting_position: Vector2, _velocity: Vector2, _scale_factor: Vector2, _health: int) -> void:
+func create_meteor(_starting_position: Vector2, _force: Vector2, _scale_factor: Vector2, _health: int) -> void:
 	var new_meteor = SPRITES[SPRITE_KEY.METEOR].instantiate()
 	new_meteor.position = _starting_position
-	new_meteor.initial_velocity = _velocity
+	new_meteor.initial_force = _force
 	new_meteor.scale_factor = _scale_factor
 	new_meteor.health = _health
 	call_add_child(new_meteor)

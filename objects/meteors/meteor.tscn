@@ -9,6 +9,21 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_j7k4j"]
 radius = 8.0
 
+[sub_resource type="Animation" id="Animation_wh8hv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_xmast"]
 resource_name = "damaged"
 length = 0.4
@@ -25,42 +40,29 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(0.862745, 0, 0, 1), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_wh8hv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_taqum"]
 _data = {
 "RESET": SubResource("Animation_wh8hv"),
 "damaged": SubResource("Animation_xmast")
 }
 
-[node name="Meteor" type="CharacterBody2D" node_paths=PackedStringArray("animation_player")]
+[node name="Meteor" type="RigidBody2D" node_paths=PackedStringArray("animation_player")]
+gravity_scale = 0.0
 script = ExtResource("1_byuyi")
 animation_player = NodePath("AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
 texture = ExtResource("2_tto6r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+scale = Vector2(4, 4)
 shape = SubResource("CircleShape2D_ircrm")
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="HitboxShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(4, 4)
 shape = SubResource("CircleShape2D_j7k4j")
 debug_color = Color(0.988235, 0, 0.286275, 0.419608)
 
