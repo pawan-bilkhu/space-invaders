@@ -3,6 +3,8 @@ extends Node
 # Groups
 const GROUP_BASE_LASER: StringName = "base_laser"
 const GROUP_RICOCHET_LASER: StringName = "ricochet_laser"
+const GROUP_ROCKET: StringName = "rocket"
+const GROUP_METEOR: StringName = "meteor"
 
 
 # Signals
@@ -23,6 +25,7 @@ enum EXPLOSION_KEY {
 	FIRE_EXPLOSION, 
 	SMALL_EXPLOSION,
 	}
+
 const EXPLOSION_SCENES = {
 	EXPLOSION_KEY.FIRE_EXPLOSION : preload("res://objects/explosions/fire_explosion/fire_explosion.tscn"),
 	EXPLOSION_KEY.SMALL_EXPLOSION : preload("res://objects/explosions/small_explosion/small_explosion.tscn"),
@@ -34,11 +37,13 @@ enum PROJECTILE_KEY {
 	RED_LASER,
 	YELLOW_LASER,
 	BLUE_LASER,
+	ROCKET,
 }
 
 const PROJECTILE_SCENES = {
 	PROJECTILE_KEY.GREEN_LASER : preload("res://projectiles/green_laser/green_laser.tscn"),
 	PROJECTILE_KEY.RED_LASER : preload("res://projectiles/red_laser/red_laser.tscn"),
+	PROJECTILE_KEY.ROCKET : preload("res://projectiles/rocket/rocket.tscn")
 }
 
 

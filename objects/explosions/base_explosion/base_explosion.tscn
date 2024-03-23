@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://objects/explosions/base_explosion/base_explosion.gd" id="1_jstgh"]
 
 [node name="BaseExplosion" type="Area2D" node_paths=PackedStringArray("animated_sprite_2d")]
+collision_layer = 8
+collision_mask = 7
 script = ExtResource("1_jstgh")
 animated_sprite_2d = NodePath("AnimatedSprite2D")
 
@@ -10,4 +12,5 @@ animated_sprite_2d = NodePath("AnimatedSprite2D")
 
 [node name="HitboxShape2D" type="CollisionShape2D" parent="."]
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

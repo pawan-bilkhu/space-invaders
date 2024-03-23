@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://b0jsanht56sqo" path="res://assets/objects/asteroid.png" id="2_tto6r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ircrm"]
-radius = 6.0
+radius = 7.75403
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j7k4j"]
-radius = 8.0
+radius = 8.75
 
 [sub_resource type="Animation" id="Animation_wh8hv"]
 length = 0.001
@@ -46,7 +46,7 @@ _data = {
 "damaged": SubResource("Animation_xmast")
 }
 
-[node name="Meteor" type="RigidBody2D" node_paths=PackedStringArray("animation_player")]
+[node name="Meteor" type="RigidBody2D" node_paths=PackedStringArray("animation_player") groups=["meteor"]]
 collision_layer = 2
 collision_mask = 7
 gravity_scale = 0.0

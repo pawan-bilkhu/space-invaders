@@ -7,6 +7,12 @@ extends CharacterBody2D
 @export var weapon_group: Node2D
 @export var shoot_timer: Timer
 @export var countdown_time: float = 0.1
+var weapon_index: int = 0
+var weapon_type: Array[GameManager.PROJECTILE_KEY] = [
+	GameManager.PROJECTILE_KEY.GREEN_LASER, 
+	GameManager.PROJECTILE_KEY.RED_LASER,
+	GameManager.PROJECTILE_KEY.ROCKET,
+	]
 var distance_to_mouse =  0
 var angle_of_rotation =  0 
 
@@ -30,8 +36,14 @@ func _physics_process(delta: float) -> void:
 	# cursor_relative_movement()
 	absolute_movement()
 	on_shoot()
+	select_weapon_type()
 	velocity = velocity.normalized()*speed
 	move_and_slide()
+
+func select_weapon_type() -> void:
+	if Input.is_action_just_pressed("select"):
+		weapon_index += 1
+		weapon_index = weapon_index % weapon_type.size()
 
 
 func on_shoot() -> void:
@@ -42,7 +54,7 @@ func on_shoot() -> void:
 		var initial_rotation: float = angle_of_rotation
 		var inital_velocity: Vector2 = distance_to_mouse.normalized()
 		for weapon in weapon_group.get_children():
-			GameManager.create_projectile(GameManager.PROJECTILE_KEY.RED_LASER, weapon.global_position, inital_velocity, initial_rotation)
+			GameManager.create_projectile(weapon_type[weapon_index], weapon.global_position, velocity + inital_velocity, initial_rotation)
 		start_countdown(countdown_time)
 
 

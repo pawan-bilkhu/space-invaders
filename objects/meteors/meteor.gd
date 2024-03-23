@@ -16,15 +16,17 @@ func _physics_process(delta: float) -> void:
 	pass
 
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group(GameManager.GROUP_BASE_LASER):
-		body.destroy()
-		animation_player.play("damaged")
-		health -= 1
-	if body.is_in_group(GameManager.GROUP_RICOCHET_LASER):
-		health -= 1
-		animation_player.play("damaged")
-		body.damage()
+func get_health() -> int:
+	return health
+
+
+func set_health(value: int) -> void:
+	health = value
+
+
+func apply_damage(damage_amount: int) -> void:
+	set_health(get_health() - damage_amount)
+	animation_player.play("damaged")
 	on_health_zero()
 
 

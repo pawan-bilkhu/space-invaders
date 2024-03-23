@@ -51,6 +51,7 @@ animations = [{
 
 [node name="SmallExplosion" instance=ExtResource("1_jivis")]
 script = ExtResource("2_oa24a")
+damage_amount = 1
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_pplma")

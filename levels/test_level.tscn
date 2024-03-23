@@ -12,6 +12,7 @@ meteor_generator_timer = NodePath("MeteorGeneratorTimer")
 
 [node name="SpaceShipSprite" parent="." instance=ExtResource("1_rk3bn")]
 position = Vector2(548, 461)
+collision_layer = 8
 
 [node name="Camera2D" type="Camera2D" parent="SpaceShipSprite"]
 position_smoothing_enabled = true

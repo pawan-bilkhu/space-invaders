@@ -11,9 +11,9 @@ size = Vector2(2, 10)
 size = Vector2(4, 12)
 
 [node name="green_laser" groups=["base_laser"] instance=ExtResource("1_mw35f")]
-collision_layer = 4
-collision_mask = 2
 script = ExtResource("2_vkq2d")
+lifespan = 5.0
+damage_amount = 2
 speed = 1000.0
 
 [node name="Sprite2D" parent="." index="0"]

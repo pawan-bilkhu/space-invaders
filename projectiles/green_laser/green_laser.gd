@@ -11,3 +11,7 @@ func destroy() -> void:
 
 func target_hit() -> void:
 	GameManager.create_explosion(GameManager.EXPLOSION_KEY.SMALL_EXPLOSION, global_position, 0.5*Vector2.ONE)
+
+
+func _on_lifespan_timer_timeout() -> void:
+	super.destroy()
