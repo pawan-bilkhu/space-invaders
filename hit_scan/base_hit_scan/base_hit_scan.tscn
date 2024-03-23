@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://rctj1jfb1wtm"]
+
+[ext_resource type="Script" path="res://hit_scan/base_hit_scan/base_hit_scan.gd" id="1_item2"]
+
+[node name="base_hit_scan" type="StaticBody2D" groups=["hitscan"]]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_item2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="HitboxShape2D" type="CollisionShape2D" parent="Area2D"]

@@ -48,6 +48,12 @@ func destroy() -> void:
 	is_dead = false
 	queue_free()
 
+func small_explosion(scale_factor: float) -> void:
+	GameManager.create_explosion(GameManager.EXPLOSION_KEY.SMALL_EXPLOSION, global_position, scale_factor*Vector2.ONE)
+
+func fire_explosion(scale_factor: float ) -> void:
+	GameManager.create_explosion(GameManager.EXPLOSION_KEY.FIRE_EXPLOSION, global_position, scale_factor*Vector2.ONE)
+
 
 func _on_lifespan_timer_timeout() -> void:
 	destroy()
@@ -58,3 +64,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.apply_damage(damage_amount)
 		apply_damage(1)
 
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	pass # Replace with function body.

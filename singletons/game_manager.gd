@@ -5,6 +5,8 @@ const GROUP_BASE_LASER: StringName = "base_laser"
 const GROUP_RICOCHET_LASER: StringName = "ricochet_laser"
 const GROUP_ROCKET: StringName = "rocket"
 const GROUP_METEOR: StringName = "meteor"
+const GROUP_SPACESHIP: StringName = "spaceship"
+const GROUP_HITSCAN: StringName = "hitscan"
 
 
 # Signals
@@ -32,19 +34,23 @@ const EXPLOSION_SCENES = {
 }
 
 # Projectile PackedScenes
-enum PROJECTILE_KEY {
+enum WEAPON_KEY {
 	GREEN_LASER,
 	RED_LASER,
 	YELLOW_LASER,
 	BLUE_LASER,
+	PINK_LASER,
 	ROCKET,
 }
 
-const PROJECTILE_SCENES = {
-	PROJECTILE_KEY.GREEN_LASER : preload("res://projectiles/green_laser/green_laser.tscn"),
-	PROJECTILE_KEY.RED_LASER : preload("res://projectiles/red_laser/red_laser.tscn"),
-	PROJECTILE_KEY.ROCKET : preload("res://projectiles/rocket/rocket.tscn")
+const WEAPON_SCENES = {
+	WEAPON_KEY.GREEN_LASER : preload("res://projectiles/green_laser/green_laser.tscn"),
+	WEAPON_KEY.RED_LASER : preload("res://projectiles/red_laser/red_laser.tscn"),
+	WEAPON_KEY.ROCKET : preload("res://projectiles/rocket/rocket.tscn"),
+	WEAPON_KEY.PINK_LASER : preload("res://hit_scan/pink_laser/pink_laser.tscn")
 }
+
+
 
 
 func add_child_deferred(child_to_add) -> void:
@@ -55,10 +61,15 @@ func call_add_child(child_to_add) -> void:
 	call_deferred("add_child_deferred", child_to_add)
 
 
-func create_projectile(key: PROJECTILE_KEY, _starting_position: Vector2, _velocity: Vector2, _rotation: float) -> void:
-	var new_projectile = PROJECTILE_SCENES[key].instantiate()
+func create_projectile(key: WEAPON_KEY, _starting_position: Vector2, _velocity: Vector2, _rotation: float) -> void:
+	var new_projectile = WEAPON_SCENES[key].instantiate()
 	new_projectile.initialize(_starting_position, _velocity, _rotation)
 	call_add_child(new_projectile)
+
+
+func create_hitscan(key: WEAPON_KEY) -> void:
+	var new_hitscan = WEAPON_SCENES[key].instantiate()
+	call_add_child(new_hitscan)
 
 
 func create_meteor(_starting_position: Vector2, _force: Vector2, _health: int) -> void:

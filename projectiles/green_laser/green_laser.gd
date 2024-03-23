@@ -5,12 +5,9 @@ func destroy() -> void:
 	if is_dead:
 		return
 	is_dead = true
-	target_hit()
+	super.small_explosion(0.5)
 	queue_free()
 
-
-func target_hit() -> void:
-	GameManager.create_explosion(GameManager.EXPLOSION_KEY.SMALL_EXPLOSION, global_position, 0.5*Vector2.ONE)
 
 
 func _on_lifespan_timer_timeout() -> void:
