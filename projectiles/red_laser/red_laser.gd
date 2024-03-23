@@ -6,7 +6,8 @@ func _physics_process(delta: float) -> void:
 	if not collision:
 		return
 	velocity = velocity.bounce(collision.get_normal())
-	rotation = atan2(velocity.y, velocity.x)
+	super.small_explosion(0.5)
+	rotation = atan2(velocity.y, velocity.x) + PI/2
 	velocity = velocity*1.2
 
 

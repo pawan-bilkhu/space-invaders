@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 @export var animation_player: AnimationPlayer
+@export var sprite_2d: Sprite2D
 @export var scale_factor: Vector2 = Vector2.ONE
 @export var initial_force: Vector2 = Vector2.ZERO
 @export var health: int = 0

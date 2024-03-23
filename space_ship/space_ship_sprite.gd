@@ -3,19 +3,11 @@ extends CharacterBody2D
 @export var speed: float = 0
 @export var area_2d: Area2D
 @export var animation_player: AnimationPlayer
+@export var player_camera_2d: Camera2D
 @export var animated_sprite_2d: Sprite2D
-@export var weapon_group: Node2D
-@export var shoot_timer: Timer
 @export var countdown_time: float = 0.1
-@export var pink_laser: StaticBody2D
-var weapon_index: int = 0
+@export var weapon_system: Node2D
 
-
-var weapon_type: Array[GameManager.WEAPON_KEY] = [
-	GameManager.WEAPON_KEY.GREEN_LASER, 
-	GameManager.WEAPON_KEY.RED_LASER,
-	GameManager.WEAPON_KEY.ROCKET,
-	]
 var distance_to_mouse =  0
 var angle_of_rotation =  0 
 
@@ -38,31 +30,12 @@ func _physics_process(delta: float) -> void:
 	angle_of_rotation = atan2(distance_to_mouse.y, distance_to_mouse.x) + PI/2
 	# cursor_relative_movement()
 	absolute_movement()
-	on_shoot()
-	select_weapon_type()
 	velocity = velocity.normalized()*speed
+	weapon_system.initial_velocity = distance_to_mouse.normalized()
+	weapon_system.initial_rotation = rotation
 	move_and_slide()
 
-func select_weapon_type() -> void:
-	if Input.is_action_just_pressed("select"):
-		weapon_index += 1
-		weapon_index = weapon_index % weapon_type.size()
-		
 
-func on_shoot() -> void:
-	if not _can_shoot:
-		return
-	if Input.is_action_pressed("shoot"):
-		_can_shoot = false
-		var initial_rotation: float = angle_of_rotation
-		var inital_velocity: Vector2 = distance_to_mouse.normalized()
-		for weapon in weapon_group.get_children():
-			GameManager.create_projectile(weapon_type[weapon_index], weapon.global_position, inital_velocity, initial_rotation)
-		start_countdown(countdown_time)
-
-
-func start_countdown(countdown) -> void:
-	shoot_timer.start(countdown)
 
 
 func reset_kinematic_properties() -> void:

@@ -1,25 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1nxkcjrr10rh"]
+[gd_scene load_steps=5 format=3 uid="uid://cnjd8xhsdmjan"]
 
 [ext_resource type="PackedScene" uid="uid://rctj1jfb1wtm" path="res://hit_scan/base_hit_scan/base_hit_scan.tscn" id="1_2d7ea"]
 [ext_resource type="Script" path="res://hit_scan/pink_laser/pink_laser.gd" id="2_t4nrj"]
-[ext_resource type="Texture2D" uid="uid://87f0loqrw1jm" path="res://assets/lasers/redLaser.png" id="3_4hw8h"]
+[ext_resource type="Texture2D" uid="uid://h0nsbi4qsp2m" path="res://assets/lasers/pinkLaser.png" id="3_3eqip"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0xpw"]
-size = Vector2(2, 10)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6piw"]
-size = Vector2(4.5, 12)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_teg8l"]
+size = Vector2(8, 18)
 
 [node name="pink_laser" instance=ExtResource("1_2d7ea")]
 script = ExtResource("2_t4nrj")
-max_scale = 100.0
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("3_4hw8h")
+position = Vector2(0, -8)
+texture = ExtResource("3_3eqip")
 
-[node name="CollisionShape2D" parent="." index="1"]
-shape = SubResource("RectangleShape2D_i0xpw")
-
-[node name="HitboxShape2D" parent="Area2D" index="0"]
-shape = SubResource("RectangleShape2D_f6piw")
-debug_color = Color(0.988235, 0, 0.298039, 0.419608)
+[node name="HitboxShape2D" parent="." index="1"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_teg8l")
+debug_color = Color(0.988235, 0, 0.294118, 0.419608)

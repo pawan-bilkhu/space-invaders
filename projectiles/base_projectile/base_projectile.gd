@@ -31,8 +31,8 @@ func get_health() -> int:
 func set_health(value: int) -> void:
 	health = value
 
-func apply_damage(damage_amount) -> void:
-	set_health(get_health() - damage_amount)
+func apply_damage(_damage_amount: int) -> void:
+	set_health(get_health() - _damage_amount)
 	on_health_zero()
 
 
@@ -48,11 +48,11 @@ func destroy() -> void:
 	is_dead = false
 	queue_free()
 
-func small_explosion(scale_factor: float) -> void:
-	GameManager.create_explosion(GameManager.EXPLOSION_KEY.SMALL_EXPLOSION, global_position, scale_factor*Vector2.ONE)
+func small_explosion(_scale_ratio: float) -> void:
+	GameManager.create_explosion(GameManager.EXPLOSION_KEY.SMALL_EXPLOSION, global_position, _scale_ratio*Vector2.ONE)
 
-func fire_explosion(scale_factor: float ) -> void:
-	GameManager.create_explosion(GameManager.EXPLOSION_KEY.FIRE_EXPLOSION, global_position, scale_factor*Vector2.ONE)
+func fire_explosion(_scale_ratio: float ) -> void:
+	GameManager.create_explosion(GameManager.EXPLOSION_KEY.FIRE_EXPLOSION, global_position, _scale_ratio*Vector2.ONE)
 
 
 func _on_lifespan_timer_timeout() -> void:

@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvjpvqpggjxhs"]
+[gd_scene load_steps=11 format=3 uid="uid://dvjpvqpggjxhs"]
 
 [ext_resource type="Texture2D" uid="uid://dtpbd10wm5bkq" path="res://assets/ships/SpaceShips.png" id="1_353it"]
 [ext_resource type="Script" path="res://space_ship/space_ship_sprite.gd" id="2_lp0il"]
-[ext_resource type="PackedScene" uid="uid://b1nxkcjrr10rh" path="res://hit_scan/pink_laser/pink_laser.tscn" id="3_e4wv7"]
+[ext_resource type="PackedScene" uid="uid://djjtj804jg2yu" path="res://weapon_system/base_weapon_system/base_weapon_system.tscn" id="4_5ntdo"]
+[ext_resource type="PackedScene" uid="uid://dhvlc353c7qs6" path="res://cameras/player_camera_2d.tscn" id="4_rlrax"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w8lnq"]
 radius = 27.0185
@@ -64,16 +65,16 @@ _data = {
 "move_right": SubResource("Animation_lmf00")
 }
 
-[node name="SpaceShipSprite" type="CharacterBody2D" node_paths=PackedStringArray("area_2d", "animation_player", "animated_sprite_2d", "weapon_group", "shoot_timer", "pink_laser") groups=["spaceship"]]
+[node name="SpaceShipSprite" type="CharacterBody2D" node_paths=PackedStringArray("area_2d", "animation_player", "player_camera_2d", "animated_sprite_2d", "weapon_system") groups=["spaceship"]]
+position = Vector2(390, 358)
 collision_mask = 11
 script = ExtResource("2_lp0il")
 speed = 600.0
 area_2d = NodePath("Area2D")
 animation_player = NodePath("AnimationPlayer")
+player_camera_2d = NodePath("Camera2D")
 animated_sprite_2d = NodePath("Sprite2D")
-weapon_group = NodePath("WeaponGroup")
-shoot_timer = NodePath("ShootTimer")
-pink_laser = NodePath("pink_laser")
+weapon_system = NodePath("WeaponSystem")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_353it")
@@ -89,24 +90,11 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_feupq")
 debug_color = Color(0.992157, 0, 0.227451, 0.419608)
 
-[node name="WeaponGroup" type="Node2D" parent="."]
-
-[node name="LeftWeapon" type="Marker2D" parent="WeaponGroup"]
-position = Vector2(-20, -40)
-
-[node name="CentreWeapon" type="Marker2D" parent="WeaponGroup"]
-position = Vector2(0, -40)
-
-[node name="RightWeapon" type="Marker2D" parent="WeaponGroup"]
-position = Vector2(19, -40)
-
-[node name="ShootTimer" type="Timer" parent="."]
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_qpu3j")
 }
 
-[node name="pink_laser" parent="." instance=ExtResource("3_e4wv7")]
+[node name="WeaponSystem" parent="." instance=ExtResource("4_5ntdo")]
 
-[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[node name="Camera2D" parent="." instance=ExtResource("4_rlrax")]

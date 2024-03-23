@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://djjtj804jg2yu"]
+
+[ext_resource type="Script" path="res://weapon_system/base_weapon_system/base_weapon_system.gd" id="1_c5tbm"]
+[ext_resource type="Texture2D" uid="uid://dtpbd10wm5bkq" path="res://assets/ships/SpaceShips.png" id="2_bshqt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4cxj"]
+atlas = ExtResource("2_bshqt")
+region = Rect2(0, 0, 70, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8in87"]
+atlas = ExtResource("2_bshqt")
+region = Rect2(70, 0, 70, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nt6q4"]
+atlas = ExtResource("2_bshqt")
+region = Rect2(140, 0, 70, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yqh7"]
+atlas = ExtResource("2_bshqt")
+region = Rect2(210, 0, 70, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1l522"]
+atlas = ExtResource("2_bshqt")
+region = Rect2(280, 0, 70, 65)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xuysi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4cxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8in87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nt6q4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yqh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1l522")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="WeaponSystem" type="Node2D" node_paths=PackedStringArray("weapon_group", "shoot_interval_timer", "reference_sprite_2d")]
+script = ExtResource("1_c5tbm")
+weapon_group = NodePath("WeaponGroup")
+shoot_interval_timer = NodePath("ShootIntervalTimer")
+interval_duration = 0.1
+reference_sprite_2d = NodePath("ReferenceSprite2D")
+
+[node name="ReferenceSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_xuysi")
+
+[node name="WeaponGroup" type="Node2D" parent="."]
+position = Vector2(0, -15)
+
+[node name="CentreWeapon" type="Marker2D" parent="WeaponGroup"]
+position = Vector2(0, -40)
+
+[node name="LeftMiddleWeapon" type="Marker2D" parent="WeaponGroup"]
+position = Vector2(-15, -34)
+
+[node name="RightMiddleWeapon" type="Marker2D" parent="WeaponGroup"]
+position = Vector2(15, -34)
+
+[node name="LeftWeapon" type="Marker2D" parent="WeaponGroup"]
+position = Vector2(-30, -19)
+
+[node name="RightWeapon" type="Marker2D" parent="WeaponGroup"]
+position = Vector2(28, -19)
+
+[node name="ShootIntervalTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="ShootIntervalTimer" to="." method="_on_shoot_interval_timer_timeout"]
