@@ -1,7 +1,8 @@
 extends Node2D
 class_name BaseWeaponSystem
 
-@export var weapon_group: Node2D
+@export var projectile_group: Node2D
+@export var hitscan_group: Node2D
 @export var shoot_interval_timer: Timer 
 @export var initial_velocity: Vector2 = Vector2(0,-1)
 @export var interval_duration: float = 0
@@ -20,6 +21,8 @@ var weapon_type: Array[GameManager.WEAPON_KEY] = [
 
 func _ready() -> void:
 	reference_sprite_2d.hide()
+	for hitscan in hitscan_group.get_children():
+			hitscan.hide()
 
 func _physics_process(delta: float) -> void:
 	select_weapon_type()
@@ -30,19 +33,20 @@ func select_weapon_type() -> void:
 		weapon_index += 1
 		weapon_index = weapon_index % weapon_type.size()
 
-
 func on_shoot() -> void:
+	if Input.is_action_pressed("shoot_alternate"):
+		for hitscan in hitscan_group.get_children():
+			hitscan.show()
+	if Input.is_action_just_released("shoot_alternate"):
+		for hitscan in hitscan_group.get_children():
+			hitscan.hide()
 	if not can_shoot:
 		return
 	if Input.is_action_pressed("shoot"):
 		can_shoot = false
-		for weapon in weapon_group.get_children():
+		for weapon in projectile_group.get_children():
 			GameManager.create_projectile(weapon_type[weapon_index], weapon.global_position, initial_velocity, initial_rotation)
-			break
 		shoot_interval_timer.start(interval_duration)
-		
-
-
 
 func _on_shoot_interval_timer_timeout() -> void:
 	can_shoot = true

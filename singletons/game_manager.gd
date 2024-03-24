@@ -72,9 +72,10 @@ func create_hitscan(key: WEAPON_KEY) -> void:
 	call_add_child(new_hitscan)
 
 
-func create_meteor(_starting_position: Vector2, _force: Vector2, _health: int) -> void:
+func create_meteor(_starting_position: Vector2, _rotation, _force: Vector2, _health: int) -> void:
 	var new_meteor = SPRITE_SCENES[SPRITE_KEY.METEOR].instantiate()
 	new_meteor.position = _starting_position
+	new_meteor.rotation_rate = _rotation
 	new_meteor.initial_force = _force
 	new_meteor.health = _health
 	call_add_child(new_meteor)

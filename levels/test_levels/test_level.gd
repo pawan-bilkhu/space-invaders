@@ -21,4 +21,4 @@ func _on_meteor_generator_timer_timeout() -> void:
 			), 
 		ceiling_camera_position.y - (space_ship.player_camera_2d.get_viewport_rect().size.y)/2
 		)
-	GameManager.create_meteor(ceiling_camera_position, Vector2(0, randf_range(100, 500)), randi_range(10, 15))
+	GameManager.create_meteor(ceiling_camera_position, randf_range(-PI/2, PI/2), Vector2(0, randf_range(100, 500)), randi_range(100, 300))

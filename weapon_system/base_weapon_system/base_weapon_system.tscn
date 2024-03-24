@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://djjtj804jg2yu"]
+[gd_scene load_steps=10 format=3 uid="uid://djjtj804jg2yu"]
 
 [ext_resource type="Script" path="res://weapon_system/base_weapon_system/base_weapon_system.gd" id="1_c5tbm"]
 [ext_resource type="Texture2D" uid="uid://dtpbd10wm5bkq" path="res://assets/ships/SpaceShips.png" id="2_bshqt"]
+[ext_resource type="PackedScene" uid="uid://cnjd8xhsdmjan" path="res://hit_scan/pink_laser/pink_laser.tscn" id="3_keut2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h4cxj"]
 atlas = ExtResource("2_bshqt")
@@ -46,9 +47,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="WeaponSystem" type="Node2D" node_paths=PackedStringArray("weapon_group", "shoot_interval_timer", "reference_sprite_2d")]
+[node name="BaseWeaponSystem" type="Node2D" node_paths=PackedStringArray("projectile_group", "hitscan_group", "shoot_interval_timer", "reference_sprite_2d")]
 script = ExtResource("1_c5tbm")
-weapon_group = NodePath("WeaponGroup")
+projectile_group = NodePath("ProjectileGroup")
+hitscan_group = NodePath("HitscanGroup")
 shoot_interval_timer = NodePath("ShootIntervalTimer")
 interval_duration = 0.1
 reference_sprite_2d = NodePath("ReferenceSprite2D")
@@ -57,23 +59,28 @@ reference_sprite_2d = NodePath("ReferenceSprite2D")
 visible = false
 sprite_frames = SubResource("SpriteFrames_xuysi")
 
-[node name="WeaponGroup" type="Node2D" parent="."]
+[node name="ProjectileGroup" type="Node2D" parent="."]
 position = Vector2(0, -15)
 
-[node name="CentreWeapon" type="Marker2D" parent="WeaponGroup"]
+[node name="CentreWeapon" type="Marker2D" parent="ProjectileGroup"]
 position = Vector2(0, -40)
 
-[node name="LeftMiddleWeapon" type="Marker2D" parent="WeaponGroup"]
+[node name="LeftMiddleWeapon" type="Marker2D" parent="ProjectileGroup"]
 position = Vector2(-15, -34)
 
-[node name="RightMiddleWeapon" type="Marker2D" parent="WeaponGroup"]
+[node name="RightMiddleWeapon" type="Marker2D" parent="ProjectileGroup"]
 position = Vector2(15, -34)
 
-[node name="LeftWeapon" type="Marker2D" parent="WeaponGroup"]
+[node name="LeftWeapon" type="Marker2D" parent="ProjectileGroup"]
 position = Vector2(-30, -19)
 
-[node name="RightWeapon" type="Marker2D" parent="WeaponGroup"]
+[node name="RightWeapon" type="Marker2D" parent="ProjectileGroup"]
 position = Vector2(28, -19)
+
+[node name="HitscanGroup" type="Node2D" parent="."]
+
+[node name="pink_laser" parent="HitscanGroup" instance=ExtResource("3_keut2")]
+position = Vector2(0, -55)
 
 [node name="ShootIntervalTimer" type="Timer" parent="."]
 
