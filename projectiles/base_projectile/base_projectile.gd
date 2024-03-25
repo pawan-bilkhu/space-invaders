@@ -60,7 +60,7 @@ func _on_lifespan_timer_timeout() -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group(GameManager.GROUP_METEOR):
+	if body.is_in_group(GameManager.GROUP_ASTEROID):
 		body.apply_damage(damage_amount)
 		apply_damage(1)
 

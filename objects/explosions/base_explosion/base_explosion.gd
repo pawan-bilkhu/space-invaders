@@ -24,5 +24,5 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group(GameManager.GROUP_METEOR):
+	if body.is_in_group(GameManager.GROUP_ASTEROID):
 		body.apply_damage(damage_amount)

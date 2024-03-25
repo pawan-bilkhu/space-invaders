@@ -5,6 +5,10 @@ func destroy() -> void:
 	if is_dead:
 		return
 	is_dead = true
-	super.fire_explosion(20)
+	small_explosion(3)
 	queue_free()
 
+
+
+func _on_lifespan_timer_timeout() -> void:
+	super.destroy()

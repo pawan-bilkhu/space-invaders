@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dwo852h0i2k8c"]
 
-[ext_resource type="PackedScene" uid="uid://bordyd3sdswla" path="res://projectiles/base_projectile/base_projectile.tscn" id="1_71xaj"]
-[ext_resource type="Script" path="res://projectiles/rocket/rocket.gd" id="2_8odqv"]
-[ext_resource type="Texture2D" uid="uid://c3lcclohxdhwb" path="res://assets/lasers/missile.png" id="2_ryye7"]
+[ext_resource type="PackedScene" uid="uid://bordyd3sdswla" path="res://projectiles/base_projectile/base_projectile.tscn" id="1_rvlgy"]
+[ext_resource type="Script" path="res://projectiles/rocket_projectile/rocket_projectile.gd" id="2_23o2q"]
+[ext_resource type="Texture2D" uid="uid://c3lcclohxdhwb" path="res://assets/lasers/missile.png" id="3_mxmwl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b6e61"]
 size = Vector2(4, 8)
@@ -10,8 +10,8 @@ size = Vector2(4, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8cuct"]
 size = Vector2(6, 10)
 
-[node name="rocket" groups=["rocket"] instance=ExtResource("1_71xaj")]
-script = ExtResource("2_8odqv")
+[node name="RocketProjectile" instance=ExtResource("1_rvlgy")]
+script = ExtResource("2_23o2q")
 lifespan = 8.0
 health = 1
 damage_amount = 1
@@ -19,7 +19,7 @@ speed = 800.0
 scale_factor = Vector2(2, 2)
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2_ryye7")
+texture = ExtResource("3_mxmwl")
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("RectangleShape2D_b6e61")

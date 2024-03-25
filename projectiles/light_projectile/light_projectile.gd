@@ -5,7 +5,7 @@ func destroy() -> void:
 	if is_dead:
 		return
 	is_dead = true
-	super.small_explosion(0.5)
+	small_explosion(0.5)
 	queue_free()
 
 

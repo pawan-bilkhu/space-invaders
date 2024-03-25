@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://projectiles/base_projectile/base_projectile.gd" id="1_01bru"]
 
-[node name="base_projectile" type="CharacterBody2D" node_paths=PackedStringArray("lifespan_timer")]
+[node name="BaseProjectile" type="CharacterBody2D" node_paths=PackedStringArray("lifespan_timer") groups=["projectile"]]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_01bru")

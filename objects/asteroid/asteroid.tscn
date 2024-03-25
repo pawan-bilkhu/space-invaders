@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://ceq4mu8xxt5o5"]
+[gd_scene load_steps=9 format=3 uid="uid://ceq4mu8xxt5o5"]
 
-[ext_resource type="Script" path="res://objects/meteors/meteor.gd" id="1_byuyi"]
-[ext_resource type="Texture2D" uid="uid://b0jsanht56sqo" path="res://assets/objects/asteroid.png" id="2_tto6r"]
+[ext_resource type="Script" path="res://objects/asteroid/asteroid.gd" id="1_07hl6"]
+[ext_resource type="Texture2D" uid="uid://b0jsanht56sqo" path="res://assets/objects/asteroid.png" id="2_ntqhx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ircrm"]
 radius = 30.0167
@@ -14,7 +14,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
+tracks/0/path = NodePath("Sprite2D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -30,14 +30,14 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
+tracks/0/path = NodePath("Sprite2D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.862745, 0, 0, 1), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_taqum"]
@@ -46,17 +46,23 @@ _data = {
 "damaged": SubResource("Animation_xmast")
 }
 
-[node name="Meteor" type="RigidBody2D" node_paths=PackedStringArray("animation_player", "sprite_2d") groups=["meteor"]]
+[sub_resource type="Curve" id="Curve_f3hdq"]
+max_value = 2.0
+_data = [Vector2(0.276347, 0.0285828), 0.0, 0.0, 0, 0, Vector2(0.285714, 0.983327), 0.0657803, 0.0657803, 0, 0, Vector2(0.758782, 1.81421), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Asteroid" type="RigidBody2D" node_paths=PackedStringArray("animation_player", "sprite_2d", "cpu_particles_2d") groups=["asteroid"]]
 collision_layer = 2
 collision_mask = 7
 gravity_scale = 0.0
-script = ExtResource("1_byuyi")
+script = ExtResource("1_07hl6")
 animation_player = NodePath("AnimationPlayer")
 sprite_2d = NodePath("Sprite2D")
+cpu_particles_2d = NodePath("CPUParticles2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
-texture = ExtResource("2_tto6r")
+texture = ExtResource("2_ntqhx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ircrm")
@@ -74,4 +80,23 @@ libraries = {
 "": SubResource("AnimationLibrary_taqum")
 }
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 35
+lifetime = 1.5
+speed_scale = 3.0
+randomness = 0.5
+lifetime_randomness = 0.25
+emission_shape = 3
+emission_rect_extents = Vector2(5, 5)
+direction = Vector2(0, 0)
+spread = 40.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 90.0
+initial_velocity_max = 175.0
+radial_accel_max = 0.8
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_f3hdq")
+
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

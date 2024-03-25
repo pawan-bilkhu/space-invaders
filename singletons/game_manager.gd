@@ -1,12 +1,10 @@
 extends Node
 
 # Groups
-const GROUP_BASE_LASER: StringName = "base_laser"
-const GROUP_RICOCHET_LASER: StringName = "ricochet_laser"
-const GROUP_ROCKET: StringName = "rocket"
-const GROUP_METEOR: StringName = "meteor"
+const GROUP_LASER: StringName = "laser"
+const GROUP_PROJECTILE: StringName = "projectile"
+const GROUP_ASTEROID: StringName = "asteroid"
 const GROUP_SPACESHIP: StringName = "spaceship"
-const GROUP_HITSCAN: StringName = "hitscan"
 
 
 # Signals
@@ -15,18 +13,18 @@ const GROUP_HITSCAN: StringName = "hitscan"
 enum SPRITE_KEY {
 	SHIP, 
 	METEOR,
-	}
+}
 	
 const SPRITE_SCENES = {
 	SPRITE_KEY.SHIP : preload("res://space_ship/space_ship_sprite.tscn"),
-	SPRITE_KEY.METEOR : preload("res://objects/meteors/meteor.tscn"),
+	SPRITE_KEY.METEOR : preload("res://objects/asteroid/asteroid.tscn"),
 }
 
 # Explosion PackedScenes
 enum EXPLOSION_KEY { 
 	FIRE_EXPLOSION, 
 	SMALL_EXPLOSION,
-	}
+}
 
 const EXPLOSION_SCENES = {
 	EXPLOSION_KEY.FIRE_EXPLOSION : preload("res://objects/explosions/fire_explosion/fire_explosion.tscn"),
@@ -35,19 +33,21 @@ const EXPLOSION_SCENES = {
 
 # Projectile PackedScenes
 enum WEAPON_KEY {
-	GREEN_LASER,
-	RED_LASER,
-	YELLOW_LASER,
+	LIGHT_PROJECTILE,
+	RICOCHET_PROJECTILE,
+	HEAVY_PROJECTILE,
+	ROCKET_PROJECTILE,
 	BLUE_LASER,
 	PINK_LASER,
-	ROCKET,
 }
 
 const WEAPON_SCENES = {
-	WEAPON_KEY.GREEN_LASER : preload("res://projectiles/green_laser/green_laser.tscn"),
-	WEAPON_KEY.RED_LASER : preload("res://projectiles/red_laser/red_laser.tscn"),
-	WEAPON_KEY.ROCKET : preload("res://projectiles/rocket/rocket.tscn"),
-	WEAPON_KEY.PINK_LASER : preload("res://hit_scan/pink_laser/pink_laser.tscn")
+	WEAPON_KEY.LIGHT_PROJECTILE : preload("res://projectiles/light_projectile/light_projectile.tscn"),
+	WEAPON_KEY.RICOCHET_PROJECTILE : preload("res://projectiles/ricochet_projectile/ricochet_projectile.tscn"),
+	WEAPON_KEY.HEAVY_PROJECTILE : preload("res://projectiles/heavy_projectile/heavy_projectile.tscn"),
+	WEAPON_KEY.ROCKET_PROJECTILE : preload("res://projectiles/rocket_projectile/rocket_projectile.tscn"),
+	WEAPON_KEY.PINK_LASER : preload("res://lasers/pink_laser/pink_laser.tscn"),
+	WEAPON_KEY.BLUE_LASER : preload("res://lasers/blue_laser/blue_laser.tscn"),
 }
 
 
@@ -67,18 +67,13 @@ func create_projectile(key: WEAPON_KEY, _starting_position: Vector2, _velocity: 
 	call_add_child(new_projectile)
 
 
-func create_hitscan(key: WEAPON_KEY) -> void:
-	var new_hitscan = WEAPON_SCENES[key].instantiate()
-	call_add_child(new_hitscan)
-
-
-func create_meteor(_starting_position: Vector2, _rotation, _force: Vector2, _health: int) -> void:
-	var new_meteor = SPRITE_SCENES[SPRITE_KEY.METEOR].instantiate()
-	new_meteor.position = _starting_position
-	new_meteor.rotation_rate = _rotation
-	new_meteor.initial_force = _force
-	new_meteor.health = _health
-	call_add_child(new_meteor)
+func create_asteroid(_starting_position: Vector2, _rotation, _force: Vector2, _health: int) -> void:
+	var new_asteroid = SPRITE_SCENES[SPRITE_KEY.METEOR].instantiate()
+	new_asteroid.position = _starting_position
+	new_asteroid.rotation_rate = _rotation
+	new_asteroid.initial_force = _force
+	new_asteroid.health = _health
+	call_add_child(new_asteroid)
 
 
 func create_space_ship(_starting_position: Vector2) -> void:

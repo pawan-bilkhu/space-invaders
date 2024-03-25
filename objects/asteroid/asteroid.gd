@@ -6,16 +6,19 @@ extends RigidBody2D
 @export var initial_force: Vector2 = Vector2.ZERO
 @export var rotation_rate: float = 0
 @export var health: int = 0
+@export var cpu_particles_2d: CPUParticles2D
 var is_dead: bool = false
 
 
 func _ready() -> void:
+	cpu_particles_2d.emitting = false
 	apply_central_impulse(initial_force)
 	apply_scale(scale_factor)
 
 
 func _physics_process(delta: float) -> void:
 	rotation += rotation_rate * delta
+	cpu_particles_2d.rotation -= rotation_rate*delta
 
 
 func get_health() -> int:
@@ -38,6 +41,12 @@ func on_health_zero() -> void:
 	destroy()
 
 
+func emit_particles(_direction: Vector2, color_ramp: Gradient) -> void:
+	cpu_particles_2d.emitting = true
+	cpu_particles_2d.direction = _direction
+	cpu_particles_2d.set_color_ramp(color_ramp)
+
+
 func destroy() -> void:
 	if is_dead:
 		return
@@ -46,3 +55,8 @@ func destroy() -> void:
 	queue_free()
 
 
+
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	if area.is_in_group(GameManager.GROUP_LASER):
+		cpu_particles_2d.color_initial_ramp
+		cpu_particles_2d.emitting = false

@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbes08kiv4e5n"]
+
+[ext_resource type="PackedScene" uid="uid://bordyd3sdswla" path="res://projectiles/base_projectile/base_projectile.tscn" id="1_vclos"]
+[ext_resource type="Script" path="res://projectiles/heavy_projectile/heavy_projectile.gd" id="2_khxw6"]
+[ext_resource type="Texture2D" uid="uid://f3nwk486eyvi" path="res://assets/lasers/yellowLaser.png" id="2_yg6ql"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5udy4"]
+size = Vector2(4, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_den1x"]
+size = Vector2(6, 12)
+
+[node name="HeavyProjectile" instance=ExtResource("1_vclos")]
+script = ExtResource("2_khxw6")
+lifespan = 8.0
+damage_amount = 25
+speed = 650.0
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_yg6ql")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_5udy4")
+
+[node name="HitboxShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_den1x")
+debug_color = Color(1, 0, 0.117647, 0.419608)

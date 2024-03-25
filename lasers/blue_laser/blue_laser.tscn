@@ -1,0 +1,105 @@
+[gd_scene load_steps=10 format=3 uid="uid://bpthedrcjo5m2"]
+
+[ext_resource type="PackedScene" uid="uid://rctj1jfb1wtm" path="res://lasers/base_laser/base_laser.tscn" id="1_0ujfj"]
+[ext_resource type="Script" path="res://lasers/blue_laser/blue_laser.gd" id="2_vgt8q"]
+[ext_resource type="Texture2D" uid="uid://cahxgqbudgb1v" path="res://assets/lasers/blueLaserSplash.png" id="3_8yjhr"]
+[ext_resource type="Texture2D" uid="uid://c4d3bbjd3060x" path="res://assets/lasers/blueLaser.png" id="4_5ueke"]
+
+[sub_resource type="Gradient" id="Gradient_1cndk"]
+offsets = PackedFloat32Array(0.709924, 1)
+colors = PackedColorArray(0, 0.0235294, 0.941176, 1, 1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xneuw"]
+size = Vector2(6, 20)
+
+[sub_resource type="Animation" id="Animation_2nlw3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Splash2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mfrvp"]
+resource_name = "pulse"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Splash2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t732l"]
+_data = {
+"RESET": SubResource("Animation_2nlw3"),
+"pulse": SubResource("Animation_mfrvp")
+}
+
+[node name="BlueLaser" instance=ExtResource("1_0ujfj")]
+script = ExtResource("2_vgt8q")
+initial_scale = Vector2(0.5, 1)
+colour_gradient = SubResource("Gradient_1cndk")
+
+[node name="Splash2D" parent="." index="0"]
+position = Vector2(0, -16)
+scale = Vector2(4, 4)
+texture = ExtResource("3_8yjhr")
+offset = Vector2(0, -1)
+
+[node name="Sprite2D" parent="." index="1"]
+position = Vector2(0, -8)
+texture = ExtResource("4_5ueke")
+
+[node name="HitboxShape2D" parent="." index="2"]
+visible = false
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_xneuw")
+debug_color = Color(0.956863, 0, 0.533333, 0.419608)
+
+[node name="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_t732l")
+}
+autoplay = "pulse"
+
+[node name="Marker2D" parent="." index="4"]
+position = Vector2(0, -16)
