@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://yc1nb5u6lk3p"]
+
+[ext_resource type="Script" path="res://entities/enemy_entity/base_enemy/base_enemy.gd" id="1_3qp1w"]
+
+[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "sprite_2d", "area_2d") groups=["enemy"]]
+collision_layer = 16
+collision_mask = 15
+script = ExtResource("1_3qp1w")
+animation_player = NodePath("AnimationPlayer")
+sprite_2d = NodePath("Sprite2D")
+area_2d = NodePath("Area2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="PolygonCollisionShape2D" type="CollisionPolygon2D" parent="."]
+
+[node name="HitBox2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 28
+
+[node name="PolygonHitBoxShape2D" type="CollisionPolygon2D" parent="HitBox2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="AreaShape2D" type="CollisionShape2D" parent="Area2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[connection signal="body_entered" from="HitBox2D" to="." method="_on_hit_box_2d_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

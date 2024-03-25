@@ -76,6 +76,7 @@ laser_weapon_select={
 2d_physics/layer_2="meteors"
 2d_physics/layer_3="projectiles"
 2d_physics/layer_4="explosions"
+2d_physics/layer_5="enemy"
 
 [rendering]
 

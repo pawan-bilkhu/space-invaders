@@ -4,7 +4,7 @@
 
 [node name="BaseProjectile" type="CharacterBody2D" node_paths=PackedStringArray("lifespan_timer") groups=["projectile"]]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 30
 script = ExtResource("1_01bru")
 lifespan_timer = NodePath("LifespanTimer")
 
@@ -14,7 +14,7 @@ lifespan_timer = NodePath("LifespanTimer")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 18
 
 [node name="HitboxShape2D" type="CollisionShape2D" parent="Area2D"]
 

@@ -5,6 +5,7 @@ const GROUP_LASER: StringName = "laser"
 const GROUP_PROJECTILE: StringName = "projectile"
 const GROUP_ASTEROID: StringName = "asteroid"
 const GROUP_SPACESHIP: StringName = "spaceship"
+const GROUP_ENEMY: StringName = "enemy"
 
 
 # Signals
@@ -67,10 +68,10 @@ func create_projectile(key: WEAPON_KEY, _starting_position: Vector2, _velocity: 
 	call_add_child(new_projectile)
 
 
-func create_asteroid(_starting_position: Vector2, _rotation, _force: Vector2, _health: int) -> void:
+func create_asteroid(_starting_position: Vector2, _torque, _force: Vector2, _health: int) -> void:
 	var new_asteroid = SPRITE_SCENES[SPRITE_KEY.METEOR].instantiate()
 	new_asteroid.position = _starting_position
-	new_asteroid.rotation_rate = _rotation
+	new_asteroid.initial_torque = _torque
 	new_asteroid.initial_force = _force
 	new_asteroid.health = _health
 	call_add_child(new_asteroid)

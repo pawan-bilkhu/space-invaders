@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var animated_sprite_2d: Sprite2D
 @export var countdown_time: float = 0.1
 @export var weapon_system: Node2D
+@export var cpu_particles_2d: CPUParticles2D
 
 var distance_to_mouse =  0
 var angle_of_rotation =  0 
@@ -34,6 +35,8 @@ func _physics_process(delta: float) -> void:
 	weapon_system.initial_velocity = distance_to_mouse.normalized()
 	weapon_system.initial_rotation = rotation
 	move_and_slide()
+	cpu_particles_2d.global_rotation = 0
+	cpu_particles_2d.global_position = global_position + Vector2(0, -500)
 
 
 

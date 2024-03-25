@@ -4,21 +4,24 @@ extends RigidBody2D
 @export var sprite_2d: Sprite2D
 @export var scale_factor: Vector2 = Vector2.ONE
 @export var initial_force: Vector2 = Vector2.ZERO
-@export var rotation_rate: float = 0
+@export var initial_torque: float
 @export var health: int = 0
 @export var cpu_particles_2d: CPUParticles2D
+
+
 var is_dead: bool = false
 
 
 func _ready() -> void:
 	cpu_particles_2d.emitting = false
 	apply_central_impulse(initial_force)
+	apply_torque_impulse(initial_torque)
 	apply_scale(scale_factor)
 
 
 func _physics_process(delta: float) -> void:
-	rotation += rotation_rate * delta
-	cpu_particles_2d.rotation -= rotation_rate*delta
+	cpu_particles_2d.global_rotation = 0
+
 
 
 func get_health() -> int:
