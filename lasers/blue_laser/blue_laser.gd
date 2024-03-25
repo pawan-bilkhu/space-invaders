@@ -1,1 +1,1 @@
-extends BaseLaser
+extends BaseRayCast

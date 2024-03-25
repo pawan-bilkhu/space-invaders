@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://djjtj804jg2yu"]
+[gd_scene load_steps=10 format=3 uid="uid://djjtj804jg2yu"]
 
 [ext_resource type="Script" path="res://weapon_system/base_weapon_system/base_weapon_system.gd" id="1_c5tbm"]
 [ext_resource type="Texture2D" uid="uid://dtpbd10wm5bkq" path="res://assets/ships/SpaceShips.png" id="2_bshqt"]
-[ext_resource type="PackedScene" uid="uid://cnjd8xhsdmjan" path="res://lasers/pink_laser/pink_laser.tscn" id="3_lfqob"]
-[ext_resource type="PackedScene" uid="uid://bpthedrcjo5m2" path="res://lasers/blue_laser/blue_laser.tscn" id="4_5sad1"]
+[ext_resource type="PackedScene" uid="uid://buicl3smblgu2" path="res://lasers/blue_laser/blue_laser.tscn" id="4_5sad1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h4cxj"]
 atlas = ExtResource("2_bshqt")
@@ -49,6 +48,7 @@ animations = [{
 }]
 
 [node name="BaseWeaponSystem" type="Node2D" node_paths=PackedStringArray("projectile_group", "laser_group", "shoot_interval_timer", "reference_sprite_2d")]
+position = Vector2(598, 382)
 script = ExtResource("1_c5tbm")
 projectile_group = NodePath("ProjectileGroup")
 laser_group = NodePath("LaserGroup")
@@ -81,9 +81,7 @@ position = Vector2(28, -19)
 [node name="LaserGroup" type="Node2D" parent="."]
 position = Vector2(0, -35)
 
-[node name="pink_laser" parent="LaserGroup" instance=ExtResource("3_lfqob")]
-
-[node name="BlueLaser" parent="LaserGroup" instance=ExtResource("4_5sad1")]
+[node name="blue_laser" parent="LaserGroup" instance=ExtResource("4_5sad1")]
 
 [node name="ShootIntervalTimer" type="Timer" parent="."]
 

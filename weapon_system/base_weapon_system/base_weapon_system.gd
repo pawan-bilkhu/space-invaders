@@ -21,19 +21,20 @@ var projectile_type: Array[GameManager.WEAPON_KEY] = [
 	GameManager.WEAPON_KEY.ROCKET_PROJECTILE,
 	]
 
+
 var laser_type: Array[GameManager.WEAPON_KEY] = [
 	GameManager.WEAPON_KEY.BLUE_LASER,
-	GameManager.WEAPON_KEY.PINK_LASER,
 ]
+
 
 func _ready() -> void:
 	reference_sprite_2d.hide()
-	for laser in laser_group.get_children():
-			laser.hide()
+
 
 func _physics_process(delta: float) -> void:
 	select_weapon_type()
 	on_shoot()
+
 
 func select_weapon_type() -> void:
 	if Input.is_action_just_pressed("projectile_weapon_select"):
@@ -45,12 +46,13 @@ func select_weapon_type() -> void:
 		laser_index += 1
 		laser_index = laser_index % laser_type.size()
 
+
 func on_shoot() -> void:
 	var laser = laser_group.get_children()
 	if Input.is_action_pressed("shoot_alternate"):
-			laser[laser_index].show()
+			laser[0].set_casting(true)
 	if Input.is_action_just_released("shoot_alternate"):
-			laser[laser_index].hide()
+			laser[0].set_casting(false)
 	if not can_shoot:
 		return
 	if Input.is_action_pressed("shoot"):
@@ -58,6 +60,7 @@ func on_shoot() -> void:
 		for weapon in projectile_group.get_children():
 			GameManager.create_projectile(projectile_type[projectile_index], weapon.global_position, initial_velocity, initial_rotation)
 		shoot_interval_timer.start(interval_duration)
+
 
 func _on_shoot_interval_timer_timeout() -> void:
 	can_shoot = true

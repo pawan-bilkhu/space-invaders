@@ -1,67 +1,40 @@
-extends Area2D
-class_name BaseLaser
+extends RayCast2D
+class_name BaseRayCast
 
+@export var line_2d: Line2D
+@export var source_particles: CPUParticles2D
+@export var laser_width: float = 0
+var can_cast: bool = false
 
-@export var initial_scale: Vector2 = Vector2(1, 1)
-@export var max_scale: float = 2
-@export var scale_rate: float = 2
-@export var offset: float = 15
-@export var health: int = 0
-@export var damage_amount: int = 0
-@export var sprite_2d: Sprite2D
-@export var splash_2d: Sprite2D
-@export var marker_2d: Marker2D
-@export var colour_gradient: Gradient
-
-var splash_2d_scale_factor: float = 0
-
-var distance_to_body: Vector2
-var is_dead: bool = false
-var can_scale: bool = true
 
 func _ready() -> void:
-	splash_2d_scale_factor = splash_2d.scale.x
-	pass
+	set_casting(false)
+
 
 func _physics_process(delta: float) -> void:
-	on_visible()
-
-
-func on_visible() -> void:
-	if not visible:
-		scale = initial_scale
-		splash_2d.scale.x = splash_2d_scale_factor/initial_scale.x
-		return
-	can_scale = true
-	emit_beam()
-	find_colliding_bodies()
-
-
-func emit_beam() -> void:
-	if can_scale and scale.y < max_scale:
-		scale.y += scale_rate
-		splash_2d.scale.y = splash_2d_scale_factor/(scale.y)
-
-
-func find_colliding_bodies() -> void:
-	var collisions = get_overlapping_bodies()
-	if not collisions:
-		return
-	can_scale = false
+	var cast_point: Vector2 = target_position
+	force_raycast_update()
 	
-	# Calcluate distance to colliding body
-	distance_to_body = collisions[0].global_position - global_position
-	# Calculate scale-ratio
-	var scale_ratio: float = (distance_to_body.length() - collisions[0].sprite_2d.get_rect().size.length() - offset) / (sprite_2d.get_rect().size.y)
-	# print("Distance: (%f, %f), \n Scale Ratio: %f" % [distance_to_body.x, distance_to_body.y, scale_ratio])
-	# Apply scale-ratio to the beam
-	scale.y = scale_ratio
-	# Emit particles from Meteor
-	apply_damage(collisions[0], 5)
-	splash_2d.scale.y = splash_2d_scale_factor/scale_ratio
+	if is_colliding():
+		cast_point = to_local(get_collision_point())
+	line_2d.points[1] = cast_point
 
 
-func apply_damage(body: Node2D, damage_amount: int) -> void:
-	if body.is_in_group(GameManager.GROUP_ASTEROID):
-		body.emit_particles((-1)*distance_to_body.normalized(), colour_gradient)
-		body.apply_damage(damage_amount)
+func set_casting(cast: bool) -> void:
+	can_cast = cast
+	if can_cast:
+		appear()
+	else:
+		disappear()
+	source_particles.emitting = can_cast
+	set_physics_process(can_cast)
+
+
+func appear() -> void:
+	var tween = get_tree().create_tween().bind_node(line_2d)
+	tween.tween_property(line_2d, "width", laser_width, 0.2)
+
+
+func disappear() -> void:
+	var tween = get_tree().create_tween().bind_node(line_2d)
+	tween.tween_property(line_2d, "width", 0, 0.2)

@@ -1,22 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://rctj1jfb1wtm"]
+[gd_scene load_steps=2 format=3 uid="uid://dxbgvlv05bd7u"]
 
 [ext_resource type="Script" path="res://lasers/base_laser/base_laser.gd" id="1_rnadv"]
 
-[node name="BaseLaser" type="Area2D" node_paths=PackedStringArray("sprite_2d", "splash_2d", "marker_2d") groups=["laser"]]
-collision_layer = 4
+[node name="base_laser" type="RayCast2D" node_paths=PackedStringArray("line_2d", "source_particles")]
+target_position = Vector2(0, -1000)
 collision_mask = 18
 script = ExtResource("1_rnadv")
-max_scale = 50.0
-sprite_2d = NodePath("Sprite2D")
-splash_2d = NodePath("Splash2D")
-marker_2d = NodePath("Marker2D")
+line_2d = NodePath("Line2D")
+source_particles = NodePath("SourceParticles2D")
 
-[node name="Splash2D" type="Sprite2D" parent="."]
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, -10)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-
-[node name="HitboxShape2D" type="CollisionShape2D" parent="."]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="SourceParticles2D" type="CPUParticles2D" parent="."]
+emitting = false

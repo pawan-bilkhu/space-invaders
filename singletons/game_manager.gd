@@ -47,7 +47,6 @@ const WEAPON_SCENES = {
 	WEAPON_KEY.RICOCHET_PROJECTILE : preload("res://projectiles/ricochet_projectile/ricochet_projectile.tscn"),
 	WEAPON_KEY.HEAVY_PROJECTILE : preload("res://projectiles/heavy_projectile/heavy_projectile.tscn"),
 	WEAPON_KEY.ROCKET_PROJECTILE : preload("res://projectiles/rocket_projectile/rocket_projectile.tscn"),
-	WEAPON_KEY.PINK_LASER : preload("res://lasers/pink_laser/pink_laser.tscn"),
 	WEAPON_KEY.BLUE_LASER : preload("res://lasers/blue_laser/blue_laser.tscn"),
 }
 
