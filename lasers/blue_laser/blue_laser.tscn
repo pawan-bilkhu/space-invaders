@@ -1,31 +1,74 @@
-[gd_scene load_steps=5 format=3 uid="uid://buicl3smblgu2"]
+[gd_scene load_steps=8 format=3 uid="uid://buicl3smblgu2"]
 
 [ext_resource type="PackedScene" uid="uid://dxbgvlv05bd7u" path="res://lasers/base_laser/base_laser.tscn" id="1_0ujfj"]
 [ext_resource type="Script" path="res://lasers/blue_laser/blue_laser.gd" id="2_vgt8q"]
+[ext_resource type="Texture2D" uid="uid://cahxgqbudgb1v" path="res://assets/lasers/blueLaserSplash.png" id="3_6ms5h"]
 
-[sub_resource type="Curve" id="Curve_cxu45"]
-_data = [Vector2(0, 0.870981), 0.0, 0.0, 0, 0, Vector2(0.896955, 0.0942835), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_4ykq0"]
+_data = [Vector2(0, 0.60262), 0.0, 0.0, 0, 0, Vector2(0.822014, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_h2h70"]
-colors = PackedColorArray(0, 0, 1, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0.439024, 0.97832)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_3erfm"]
+_data = [Vector2(0, 0.86582), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_i81v5"]
+offsets = PackedFloat32Array(0.00542005, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="blue_laser" instance=ExtResource("1_0ujfj")]
 script = ExtResource("2_vgt8q")
-laser_width = 5.0
+laser_width = 10.0
+damage_rate = 50
 
 [node name="Line2D" parent="." index="0"]
 default_color = Color(0, 0, 1, 1)
 
 [node name="SourceParticles2D" parent="." index="1"]
 amount = 30
-lifetime = 0.6
+lifetime = 0.4
+texture = ExtResource("3_6ms5h")
 emission_shape = 3
 emission_rect_extents = Vector2(6, 1)
 direction = Vector2(0, -1)
 gravity = Vector2(0, 0)
 initial_velocity_min = 40.0
 initial_velocity_max = 60.0
-scale_amount_max = 2.0
-scale_amount_curve = SubResource("Curve_cxu45")
+scale_amount_min = 0.25
+scale_amount_max = 0.6
+scale_amount_curve = SubResource("Curve_4ykq0")
+color = Color(0, 1, 1, 0.847059)
 color_ramp = SubResource("Gradient_h2h70")
+
+[node name="TargetParticles2D" parent="." index="2"]
+amount = 30
+lifetime = 0.2
+texture = ExtResource("3_6ms5h")
+emission_shape = 3
+emission_rect_extents = Vector2(4, 1)
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+scale_amount_min = 0.25
+scale_amount_max = 0.6
+scale_amount_curve = SubResource("Curve_3erfm")
+color_ramp = SubResource("Gradient_i81v5")
+
+[node name="BeamParticles2D" parent="." index="3"]
+lifetime = 0.5
+texture = ExtResource("3_6ms5h")
+emission_shape = 3
+emission_rect_extents = Vector2(6, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+tangential_accel_min = 100.0
+tangential_accel_max = 100.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3

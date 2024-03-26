@@ -110,6 +110,7 @@ editor_draw_drag_margin = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Camera2D"]
 position = Vector2(-1, -541)
+emitting = false
 amount = 100
 lifetime = 3.0
 emission_shape = 3

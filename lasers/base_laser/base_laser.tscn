@@ -2,15 +2,24 @@
 
 [ext_resource type="Script" path="res://lasers/base_laser/base_laser.gd" id="1_rnadv"]
 
-[node name="base_laser" type="RayCast2D" node_paths=PackedStringArray("line_2d", "source_particles")]
+[node name="base_laser" type="RayCast2D" node_paths=PackedStringArray("line_2d", "source_particles_2d", "target_particles_2d", "beam_particles_2d")]
 target_position = Vector2(0, -1000)
 collision_mask = 18
 script = ExtResource("1_rnadv")
 line_2d = NodePath("Line2D")
-source_particles = NodePath("SourceParticles2D")
+source_particles_2d = NodePath("SourceParticles2D")
+target_particles_2d = NodePath("TargetParticles2D")
+beam_particles_2d = NodePath("BeamParticles2D")
 
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, -10)
 
 [node name="SourceParticles2D" type="CPUParticles2D" parent="."]
 emitting = false
+
+[node name="TargetParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+
+[node name="BeamParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 30

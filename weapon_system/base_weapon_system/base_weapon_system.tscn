@@ -48,7 +48,6 @@ animations = [{
 }]
 
 [node name="BaseWeaponSystem" type="Node2D" node_paths=PackedStringArray("projectile_group", "laser_group", "shoot_interval_timer", "reference_sprite_2d")]
-position = Vector2(598, 382)
 script = ExtResource("1_c5tbm")
 projectile_group = NodePath("ProjectileGroup")
 laser_group = NodePath("LaserGroup")
