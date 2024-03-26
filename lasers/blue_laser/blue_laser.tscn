@@ -1,74 +1,70 @@
-[gd_scene load_steps=8 format=3 uid="uid://buicl3smblgu2"]
+[gd_scene load_steps=10 format=3 uid="uid://buicl3smblgu2"]
 
 [ext_resource type="PackedScene" uid="uid://dxbgvlv05bd7u" path="res://lasers/base_laser/base_laser.tscn" id="1_0ujfj"]
 [ext_resource type="Script" path="res://lasers/blue_laser/blue_laser.gd" id="2_vgt8q"]
 [ext_resource type="Texture2D" uid="uid://cahxgqbudgb1v" path="res://assets/lasers/blueLaserSplash.png" id="3_6ms5h"]
 
-[sub_resource type="Curve" id="Curve_4ykq0"]
-_data = [Vector2(0, 0.60262), 0.0, 0.0, 0, 0, Vector2(0.822014, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+[sub_resource type="Gradient" id="Gradient_isnm2"]
+offsets = PackedFloat32Array(0, 0.699029, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="Gradient" id="Gradient_h2h70"]
-offsets = PackedFloat32Array(0.439024, 0.97832)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a4430"]
+gradient = SubResource("Gradient_isnm2")
 
-[sub_resource type="Curve" id="Curve_3erfm"]
-_data = [Vector2(0, 0.86582), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+[sub_resource type="Curve" id="Curve_7tbs6"]
+_data = [Vector2(0, 0.54876), 0.0, 0.0, 0, 0, Vector2(0.671937, 0.559504), -4.73225e-07, -4.73225e-07, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_i81v5"]
-offsets = PackedFloat32Array(0.00542005, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+[sub_resource type="CurveTexture" id="CurveTexture_iuc5v"]
+curve = SubResource("Curve_7tbs6")
 
-[node name="blue_laser" instance=ExtResource("1_0ujfj")]
-script = ExtResource("2_vgt8q")
-laser_width = 10.0
-damage_rate = 50
-
-[node name="Line2D" parent="." index="0"]
-default_color = Color(0, 0, 1, 1)
-
-[node name="SourceParticles2D" parent="." index="1"]
-amount = 30
-lifetime = 0.4
-texture = ExtResource("3_6ms5h")
-emission_shape = 3
-emission_rect_extents = Vector2(6, 1)
-direction = Vector2(0, -1)
-gravity = Vector2(0, 0)
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6n8fc"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
 initial_velocity_min = 40.0
 initial_velocity_max = 60.0
-scale_amount_min = 0.25
-scale_amount_max = 0.6
-scale_amount_curve = SubResource("Curve_4ykq0")
-color = Color(0, 1, 1, 0.847059)
-color_ramp = SubResource("Gradient_h2h70")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+scale_curve = SubResource("CurveTexture_iuc5v")
+color_ramp = SubResource("GradientTexture1D_a4430")
+turbulence_noise_strength = 9.7
 
-[node name="TargetParticles2D" parent="." index="2"]
-amount = 30
-lifetime = 0.2
+[sub_resource type="Environment" id="Environment_1etuw"]
+background_mode = 3
+glow_enabled = true
+glow_levels/3 = 2.6
+glow_levels/4 = 0.91
+glow_levels/5 = 1.6
+glow_levels/6 = 1.7
+glow_levels/7 = 2.6
+glow_blend_mode = 0
+glow_hdr_threshold = 0.51
+
+[node name="BlueLaser" instance=ExtResource("1_0ujfj")]
+script = ExtResource("2_vgt8q")
+laser_width = 5.0
+
+[node name="Line2D" parent="." index="0"]
+closed = true
+default_color = Color(0.337247, 0.526337, 0.94947, 1)
+
+[node name="CastingParticles2D" parent="." index="1"]
+self_modulate = Color(0, 100, 100, 1)
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_6n8fc")
 texture = ExtResource("3_6ms5h")
-emission_shape = 3
-emission_rect_extents = Vector2(4, 1)
-direction = Vector2(0, 1)
-gravity = Vector2(0, 0)
-initial_velocity_min = 100.0
-initial_velocity_max = 200.0
-scale_amount_min = 0.25
-scale_amount_max = 0.6
-scale_amount_curve = SubResource("Curve_3erfm")
-color_ramp = SubResource("Gradient_i81v5")
+lifetime = 0.3
+randomness = 0.8
+
+[node name="CollisionParticles2D" parent="." index="2"]
+self_modulate = Color(1, 100, 100, 1)
+amount = 50
+texture = ExtResource("3_6ms5h")
 
 [node name="BeamParticles2D" parent="." index="3"]
-lifetime = 0.5
+self_modulate = Color(1, 100, 100, 1)
+amount = 20
 texture = ExtResource("3_6ms5h")
-emission_shape = 3
-emission_rect_extents = Vector2(6, 1)
-spread = 180.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 10.0
-initial_velocity_max = 15.0
-tangential_accel_min = 100.0
-tangential_accel_max = 100.0
-scale_amount_min = 0.2
-scale_amount_max = 0.3
+
+[node name="WorldEnvironment" parent="." index="5"]
+environment = SubResource("Environment_1etuw")

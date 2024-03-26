@@ -40,19 +40,15 @@ func select_weapon_type() -> void:
 	if Input.is_action_just_pressed("projectile_weapon_select"):
 		projectile_index += 1
 		projectile_index = projectile_index % projectile_type.size()
-	if Input.is_action_just_pressed("laser_weapon_select"):
-		var laser = laser_group.get_children()
-		laser[laser_index].hide()
-		laser_index += 1
-		laser_index = laser_index % laser_type.size()
 
 
 func on_shoot() -> void:
-	var laser = laser_group.get_children()
 	if Input.is_action_pressed("shoot_alternate"):
-			laser[0].set_casting(true)
+		for laser in laser_group.get_children():
+			laser.set_casting(true)
 	if Input.is_action_just_released("shoot_alternate"):
-			laser[0].set_casting(false)
+		for laser in laser_group.get_children():
+			laser.set_casting(false)
 	if not can_shoot:
 		return
 	if Input.is_action_pressed("shoot"):

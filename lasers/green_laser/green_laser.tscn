@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://cp0beiekkpsrs"]
+
+[ext_resource type="PackedScene" uid="uid://dxbgvlv05bd7u" path="res://lasers/base_laser/base_laser.tscn" id="1_bpee7"]
+[ext_resource type="Script" path="res://lasers/green_laser/green_laser.gd" id="2_wxdy7"]
+[ext_resource type="Texture2D" uid="uid://cahxgqbudgb1v" path="res://assets/lasers/blueLaserSplash.png" id="3_vbevr"]
+
+[sub_resource type="Environment" id="Environment_yrf8j"]
+resource_local_to_scene = true
+background_mode = 3
+glow_enabled = true
+glow_levels/3 = 2.6
+glow_levels/4 = 0.91
+glow_levels/5 = 1.6
+glow_levels/6 = 1.7
+glow_levels/7 = 2.6
+glow_blend_mode = 0
+glow_hdr_threshold = 0.51
+
+[node name="GreenLaser" instance=ExtResource("1_bpee7")]
+script = ExtResource("2_wxdy7")
+laser_width = 6.0
+damage_rate = 20
+
+[node name="Line2D" parent="." index="0"]
+default_color = Color(0, 1, 0.231373, 1)
+
+[node name="CastingParticles2D" parent="." index="1"]
+self_modulate = Color(0, 100, 0, 1)
+texture = ExtResource("3_vbevr")
+
+[node name="CollisionParticles2D" parent="." index="2"]
+self_modulate = Color(0, 100, 0, 1)
+texture = ExtResource("3_vbevr")
+
+[node name="BeamParticles2D" parent="." index="3"]
+self_modulate = Color(0.014, 100, 0.011, 1)
+texture = ExtResource("3_vbevr")
+
+[node name="WorldEnvironment" parent="." index="4"]
+environment = SubResource("Environment_yrf8j")

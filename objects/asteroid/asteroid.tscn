@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b0jsanht56sqo" path="res://assets/objects/asteroid.png" id="2_ntqhx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ircrm"]
-radius = 30.0167
+radius = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j7k4j"]
 radius = 32.0156
@@ -98,6 +98,7 @@ initial_velocity_max = 175.0
 radial_accel_max = 0.8
 scale_amount_max = 3.0
 scale_amount_curve = SubResource("Curve_f3hdq")
+color = Color(1, 0, 1, 0.952941)
 
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

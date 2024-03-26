@@ -101,10 +101,11 @@ libraries = {
 
 [node name="Camera2D" parent="." instance=ExtResource("4_rlrax")]
 limit_smoothed = true
-drag_left_margin = 0.5
-drag_top_margin = 0.5
-drag_right_margin = 0.5
-drag_bottom_margin = 0.5
+position_smoothing_speed = 1.0
+drag_left_margin = 0.3
+drag_top_margin = 0.3
+drag_right_margin = 0.3
+drag_bottom_margin = 0.3
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
