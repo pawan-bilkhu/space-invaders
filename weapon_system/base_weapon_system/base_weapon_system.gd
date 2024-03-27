@@ -62,7 +62,7 @@ func on_shoot() -> void:
 
 func add_laser_weapons() -> void:
 	for markers in projectile_group.get_children():
-		GameManager.create_laser_emitter(laser_type.pick_random(), markers.global_position, laser_group)
+		GameManager.create_laser_emitter(laser_type.pick_random(), markers.position, laser_group)
 
 func _on_shoot_interval_timer_timeout() -> void:
 	can_shoot = true

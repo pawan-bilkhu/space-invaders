@@ -92,25 +92,23 @@ points = PackedVector2Array(0, 0, 0, -10)
 
 [node name="CastingParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 30
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_7x303")
-lifetime = 0.2
-randomness = 0.3
+lifetime = 0.1
 local_coords = true
 
 [node name="CollisionParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 30
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_n5bd4")
-lifetime = 0.25
-randomness = 0.4
+lifetime = 0.1
 local_coords = true
 
 [node name="BeamParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 30
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_6wodb")
-lifetime = 0.3
+lifetime = 0.1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lhv7n")

@@ -55,7 +55,6 @@ interval_duration = 0.1
 reference_sprite_2d = NodePath("ReferenceSprite2D")
 
 [node name="ReferenceSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
 sprite_frames = SubResource("SpriteFrames_xuysi")
 
 [node name="ProjectileGroup" type="Node2D" parent="."]
