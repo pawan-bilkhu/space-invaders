@@ -39,7 +39,8 @@ enum WEAPON_KEY {
 	HEAVY_PROJECTILE,
 	ROCKET_PROJECTILE,
 	BLUE_LASER,
-	PINK_LASER,
+	GREEN_LASER,
+	WHITE_LASER,
 }
 
 const WEAPON_SCENES = {
@@ -48,6 +49,8 @@ const WEAPON_SCENES = {
 	WEAPON_KEY.HEAVY_PROJECTILE : preload("res://projectiles/heavy_projectile/heavy_projectile.tscn"),
 	WEAPON_KEY.ROCKET_PROJECTILE : preload("res://projectiles/rocket_projectile/rocket_projectile.tscn"),
 	WEAPON_KEY.BLUE_LASER : preload("res://lasers/blue_laser/blue_laser.tscn"),
+	WEAPON_KEY.GREEN_LASER : preload("res://lasers/green_laser/green_laser.tscn"),
+	WEAPON_KEY.WHITE_LASER : preload("res://lasers/white_laser/white_laser.tscn"),
 }
 
 
@@ -74,6 +77,12 @@ func create_asteroid(_starting_position: Vector2, _torque, _force: Vector2, _hea
 	new_asteroid.initial_force = _force
 	new_asteroid.health = _health
 	call_add_child(new_asteroid)
+
+
+func create_laser_emitter(key: WEAPON_KEY, _starting_position: Vector2, node_group: Node) -> void:
+	var new_laser_emitter = WEAPON_SCENES[key].instantiate()
+	new_laser_emitter.position = _starting_position
+	node_group.add_child(new_laser_emitter)
 
 
 func create_space_ship(_starting_position: Vector2) -> void:

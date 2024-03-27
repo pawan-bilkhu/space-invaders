@@ -18,12 +18,7 @@ func _ready():
 
 
 func _physics_process(delta):
-	rotation += 5*delta
 	move_and_slide()
-	if not player_reference:
-		return
-	distance_to_body = player_reference.global_position - global_position
-	rotation = atan2(distance_to_body.y, distance_to_body.x) - PI/2
 
 
 func get_health() -> int:

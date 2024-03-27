@@ -24,11 +24,14 @@ var projectile_type: Array[GameManager.WEAPON_KEY] = [
 
 var laser_type: Array[GameManager.WEAPON_KEY] = [
 	GameManager.WEAPON_KEY.BLUE_LASER,
+	GameManager.WEAPON_KEY.GREEN_LASER,
+	GameManager.WEAPON_KEY.WHITE_LASER,
 ]
 
 
 func _ready() -> void:
 	reference_sprite_2d.hide()
+	add_laser_weapons()
 
 
 func _physics_process(delta: float) -> void:
@@ -57,6 +60,9 @@ func on_shoot() -> void:
 			GameManager.create_projectile(projectile_type[projectile_index], weapon.global_position, initial_velocity, initial_rotation)
 		shoot_interval_timer.start(interval_duration)
 
+func add_laser_weapons() -> void:
+	for markers in projectile_group.get_children():
+		GameManager.create_laser_emitter(laser_type.pick_random(), markers.global_position, laser_group)
 
 func _on_shoot_interval_timer_timeout() -> void:
 	can_shoot = true

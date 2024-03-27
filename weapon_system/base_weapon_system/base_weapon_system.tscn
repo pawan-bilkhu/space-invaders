@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://djjtj804jg2yu"]
+[gd_scene load_steps=9 format=3 uid="uid://djjtj804jg2yu"]
 
 [ext_resource type="Script" path="res://weapon_system/base_weapon_system/base_weapon_system.gd" id="1_c5tbm"]
 [ext_resource type="Texture2D" uid="uid://dtpbd10wm5bkq" path="res://assets/ships/SpaceShips.png" id="2_bshqt"]
-[ext_resource type="PackedScene" uid="uid://bg6p1jb70e585" path="res://lasers/white_laser/white_laser.tscn" id="3_5xvr6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h4cxj"]
 atlas = ExtResource("2_bshqt")
@@ -79,9 +78,6 @@ position = Vector2(28, -19)
 
 [node name="LaserGroup" type="Node2D" parent="."]
 position = Vector2(0, -50)
-
-[node name="WhiteLaser" parent="LaserGroup" instance=ExtResource("3_5xvr6")]
-position = Vector2(0, 16)
 
 [node name="ShootIntervalTimer" type="Timer" parent="."]
 

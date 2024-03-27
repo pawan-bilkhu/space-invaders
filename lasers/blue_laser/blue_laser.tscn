@@ -66,5 +66,5 @@ self_modulate = Color(1, 100, 100, 1)
 amount = 20
 texture = ExtResource("3_6ms5h")
 
-[node name="WorldEnvironment" parent="." index="5"]
+[node name="WorldEnvironment" parent="." index="4"]
 environment = SubResource("Environment_1etuw")

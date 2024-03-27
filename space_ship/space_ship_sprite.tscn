@@ -67,7 +67,6 @@ _data = {
 
 [node name="SpaceShipSprite" type="CharacterBody2D" node_paths=PackedStringArray("area_2d", "animation_player", "player_camera_2d", "animated_sprite_2d", "weapon_system", "cpu_particles_2d") groups=["spaceship"]]
 z_index = 100
-position = Vector2(1, 1)
 collision_mask = 11
 script = ExtResource("2_lp0il")
 speed = 600.0
@@ -101,11 +100,10 @@ libraries = {
 
 [node name="Camera2D" parent="." instance=ExtResource("4_rlrax")]
 limit_smoothed = true
-position_smoothing_speed = 1.0
-drag_left_margin = 0.3
-drag_top_margin = 0.3
-drag_right_margin = 0.3
-drag_bottom_margin = 0.3
+drag_left_margin = 0.5
+drag_top_margin = 0.5
+drag_right_margin = 0.5
+drag_bottom_margin = 0.5
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
