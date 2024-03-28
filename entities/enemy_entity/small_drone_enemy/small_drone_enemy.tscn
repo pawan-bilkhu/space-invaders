@@ -1,11 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://8om5ckn8x4li"]
+[gd_scene load_steps=8 format=3 uid="uid://8om5ckn8x4li"]
 
 [ext_resource type="PackedScene" uid="uid://yc1nb5u6lk3p" path="res://entities/enemy_entity/base_enemy/base_enemy.tscn" id="1_6s332"]
 [ext_resource type="Script" path="res://entities/enemy_entity/small_drone_enemy/small_drone_enemy.gd" id="2_t00xh"]
 [ext_resource type="Texture2D" uid="uid://ddc8umc0nib8b" path="res://assets/ships/droneFighterSmall.png" id="3_e0gut"]
-[ext_resource type="Script" path="res://states/state_machine.gd" id="4_ehsxa"]
-[ext_resource type="Script" path="res://states/enemy_idle.gd" id="5_1mgll"]
-[ext_resource type="Script" path="res://states/enemy_follow.gd" id="6_tw5pa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_63ykt"]
 radius = 192.26
@@ -56,10 +53,10 @@ health = 500
 texture = ExtResource("3_e0gut")
 
 [node name="PolygonCollisionShape2D" parent="." index="1"]
-polygon = PackedVector2Array(0, -10, 18, -15, 24, -4, 24, 7, 18, 19, 0, 11, -19, 19, -25, 7, -25, -4, -19, -15)
+polygon = PackedVector2Array(11, 0, 19, 17, 7, 25, -4, 25, -15, 17, -10, 0, -15, -16, -4, -24, 7, -24, 19, -16)
 
 [node name="PolygonHitBoxShape2D" parent="HitBox2D" index="0"]
-polygon = PackedVector2Array(0, -10, 18, -15, 24, -4, 24, 7, 18, 19, 0, 11, -19, 19, -25, 7, -25, -4, -19, -15)
+polygon = PackedVector2Array(11, 0, 19, 17, 7, 25, -4, 25, -15, 17, -10, 0, -15, -16, -4, -24, 7, -24, 19, -16)
 
 [node name="Area2D" parent="." index="3"]
 collision_layer = 0
@@ -72,16 +69,3 @@ debug_color = Color(0.976471, 0, 0.396078, 0.419608)
 libraries = {
 "": SubResource("AnimationLibrary_4csqt")
 }
-
-[node name="StateMachine" type="Node" parent="." index="5" node_paths=PackedStringArray("initial_state")]
-script = ExtResource("4_ehsxa")
-initial_state = NodePath("EnemyFollow")
-
-[node name="Idle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy")]
-script = ExtResource("5_1mgll")
-enemy = NodePath("../..")
-move_speed = 40.0
-
-[node name="EnemyFollow" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy")]
-script = ExtResource("6_tw5pa")
-enemy = NodePath("../..")

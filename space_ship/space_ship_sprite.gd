@@ -53,9 +53,9 @@ func cursor_relative_movement() -> void:
 	if Input.is_action_pressed("move_down"):
 		velocity = (-1)*distance_to_mouse
 	if Input.is_action_pressed("move_left"):
-		velocity = Vector2(distance_to_mouse.y, (-1)*distance_to_mouse.x)
+		velocity = distance_to_mouse.orthogonal()
 	if Input.is_action_pressed("move_right"):
-		velocity = Vector2((-1)*distance_to_mouse.y, distance_to_mouse.x)
+		velocity = (-1)*distance_to_mouse.orthogonal()
 
 func absolute_movement() -> void:
 	reset_kinematic_properties()
