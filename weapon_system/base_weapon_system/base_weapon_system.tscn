@@ -58,7 +58,6 @@ reference_sprite_2d = NodePath("ReferenceSprite2D")
 sprite_frames = SubResource("SpriteFrames_xuysi")
 
 [node name="ProjectileGroup" type="Node2D" parent="."]
-position = Vector2(0, -10)
 
 [node name="CentreWeapon" type="Marker2D" parent="ProjectileGroup"]
 position = Vector2(0, -40)
@@ -76,7 +75,6 @@ position = Vector2(-30, -19)
 position = Vector2(28, -19)
 
 [node name="LaserGroup" type="Node2D" parent="."]
-position = Vector2(0, -10)
 
 [node name="ShootIntervalTimer" type="Timer" parent="."]
 

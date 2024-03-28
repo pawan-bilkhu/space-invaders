@@ -57,6 +57,7 @@ func on_shoot() -> void:
 	if Input.is_action_pressed("shoot"):
 		can_shoot = false
 		for weapon in projectile_group.get_children():
+			GameManager.create_muzzle_flash(weapon.position, Vector2(1,1), self)
 			GameManager.create_projectile(projectile_type[projectile_index], weapon.global_position, initial_velocity, initial_rotation)
 		shoot_interval_timer.start(interval_duration)
 

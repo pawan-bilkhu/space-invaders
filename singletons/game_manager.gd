@@ -25,11 +25,13 @@ const SPRITE_SCENES = {
 enum EXPLOSION_KEY { 
 	FIRE_EXPLOSION, 
 	SMALL_EXPLOSION,
+	MUZZLE_FLASH,
 }
 
 const EXPLOSION_SCENES = {
 	EXPLOSION_KEY.FIRE_EXPLOSION : preload("res://objects/explosions/fire_explosion/fire_explosion.tscn"),
 	EXPLOSION_KEY.SMALL_EXPLOSION : preload("res://objects/explosions/small_explosion/small_explosion.tscn"),
+	EXPLOSION_KEY.MUZZLE_FLASH : preload("res://objects/muzzle_flash/muzzle_falsh.tscn"),
 }
 
 # Projectile PackedScenes
@@ -97,3 +99,9 @@ func create_explosion(key: EXPLOSION_KEY, _starting_position: Vector2, _scale_fa
 	new_explosion.scale_factor = _scale_factor
 	call_add_child(new_explosion)
 
+
+func create_muzzle_flash(_starting_position: Vector2, _scale_factor: Vector2, node_group: Node) -> void:
+	var new_muzzle_flash = EXPLOSION_SCENES[EXPLOSION_KEY.MUZZLE_FLASH].instantiate()
+	new_muzzle_flash.position = _starting_position
+	new_muzzle_flash.scale_factor = _scale_factor
+	node_group.add_child(new_muzzle_flash)
