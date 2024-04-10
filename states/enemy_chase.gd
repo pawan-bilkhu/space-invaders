@@ -1,5 +1,5 @@
 extends State
-class_name EnemyFollow
+class_name EnemyChase
 
 
 @export var enemy: CharacterBody2D
@@ -14,12 +14,12 @@ func Physics_Update(delta: float) -> void:
 	if not space_ship:
 		return
 	var direction = space_ship.global_position - enemy.global_position
-	
-	if direction.length() < 800:
-		enemy.velocity = direction.normalized()*move_speed
-		enemy.rotate_to_target(direction.normalized(), delta)
-	else:
-		print("transitioning")
-		Transitioned.emit(self, "idle")
-		
+	enemy.velocity = direction.normalized()*move_speed
+	enemy.rotate_to_target(direction.normalized(), delta)
 
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	print("Something has exited my detection range")
+	if body.is_in_group(GameManager.GROUP_SPACESHIP):
+		Transitioned.emit(self, "patrol")

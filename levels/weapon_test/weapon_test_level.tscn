@@ -11,9 +11,7 @@ position = Vector2(509, 323)
 initial_torque = 5.0
 health = 50000
 
-[node name="SmallDroneEnemy" parent="." instance=ExtResource("3_gdr2f")]
-position = Vector2(202, 198)
-health = 50000
-
 [node name="SpaceShipSprite" parent="." instance=ExtResource("1_umitu")]
 position = Vector2(343, 410)
+
+[node name="SmallDroneEnemy" parent="." instance=ExtResource("3_gdr2f")]

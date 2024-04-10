@@ -1,5 +1,5 @@
 extends State
-class_name EnemyIdle
+class_name EnemyPatrol
 
 @export var enemy: CharacterBody2D
 @export var move_speed: float = 10.0
@@ -28,9 +28,10 @@ func Update(delta: float) -> void:
 func Physics_Update(delta: float) -> void:
 	enemy.velocity = move_direction*move_speed
 	enemy.rotate_to_target(move_direction, delta)
-	var distance_to_player = space_ship.global_position - enemy.global_position
-	
-	if distance_to_player.length() < 200:
-		print(distance_to_player)
-		Transitioned.emit(self, "follow")
-	
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	print("Something entered my detection range")
+	if body.is_in_group(GameManager.GROUP_SPACESHIP):
+		Transitioned.emit(self, "chase")
+

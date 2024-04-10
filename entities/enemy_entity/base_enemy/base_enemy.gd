@@ -4,7 +4,6 @@ class_name BaseEnemy
 @export var animation_player: AnimationPlayer
 @export var sprite_2d: Sprite2D
 @export var health: int = 0
-@export var area_2d: Area2D
 @export var rotation_speed: float = 2.0
 var distance_to_body: Vector2
 var player_reference: CharacterBody2D
